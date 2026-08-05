@@ -13,14 +13,23 @@ export function Hero() {
 
       <div className="relative mx-auto grid max-w-7xl gap-14 px-4 sm:px-6 lg:grid-cols-2 lg:items-center lg:px-8">
         <div>
-          <h1 className="text-balance font-heading text-4xl font-medium leading-[1.1] text-fg sm:text-5xl lg:text-[3.25rem]">
+          <h1
+            className="text-balance font-heading text-4xl font-medium leading-[1.1] text-fg motion-safe:animate-fade-up sm:text-5xl lg:text-[3.25rem]"
+            style={{ animationDelay: "0ms" }}
+          >
             {heroContent.headline}
           </h1>
-          <p className="mt-6 max-w-xl text-balance text-lg leading-relaxed text-fg-muted">
+          <p
+            className="mt-6 max-w-xl text-balance text-lg leading-relaxed text-fg-muted motion-safe:animate-fade-up"
+            style={{ animationDelay: "90ms" }}
+          >
             {heroContent.subheadline}
           </p>
 
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+          <div
+            className="mt-9 flex flex-col gap-3 motion-safe:animate-fade-up sm:flex-row"
+            style={{ animationDelay: "180ms" }}
+          >
             <TrackedCTA event="hero_primary_cta_clicked" ctaLocation="hero" action="book" size="lg">
               {heroContent.primaryCta}
             </TrackedCTA>
@@ -36,8 +45,16 @@ export function Hero() {
             </TrackedCTA>
           </div>
 
-          <p className="mt-4 text-sm text-fg-subtle">{heroContent.microcopy}</p>
-          <p className="mt-8 border-t border-border pt-6 text-sm text-fg-muted">
+          <p
+            className="mt-4 text-sm text-fg-subtle motion-safe:animate-fade-up"
+            style={{ animationDelay: "260ms" }}
+          >
+            {heroContent.microcopy}
+          </p>
+          <p
+            className="mt-8 border-t border-border pt-6 text-sm text-fg-muted motion-safe:animate-fade-up"
+            style={{ animationDelay: "320ms" }}
+          >
             {heroContent.credibility}
           </p>
         </div>

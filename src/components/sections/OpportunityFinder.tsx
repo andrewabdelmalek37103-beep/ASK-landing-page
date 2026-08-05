@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowLeft, CheckCircle2 } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Card } from "@/components/ui/Card";
@@ -49,6 +50,7 @@ export function OpportunityFinder() {
 
   const isComplete = stepIndex >= assessmentQuestions.length;
   const currentQuestion = assessmentQuestions[stepIndex];
+  const shouldReduceMotion = useReducedMotion();
 
   const resultId = useMemo(() => computeRecommendation(answers), [answers]);
   const result = assessmentResults[resultId];
@@ -93,8 +95,16 @@ export function OpportunityFinder() {
         />
 
         <Card className="mt-10 overflow-hidden">
+        <AnimatePresence mode="wait" initial={false}>
           {!isComplete && currentQuestion ? (
-            <div className="p-6 sm:p-10">
+            <motion.div
+              key={`question-${stepIndex}`}
+              initial={shouldReduceMotion ? false : { opacity: 0, x: 16 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={shouldReduceMotion ? undefined : { opacity: 0, x: -16 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              className="p-6 sm:p-10"
+            >
               <div className="mb-8 flex items-center justify-between">
                 <p className="text-sm text-fg-subtle">
                   Question {stepIndex + 1} of {assessmentQuestions.length}
@@ -138,9 +148,16 @@ export function OpportunityFinder() {
                   <ArrowLeft className="h-4 w-4" aria-hidden="true" /> Back
                 </button>
               )}
-            </div>
+            </motion.div>
           ) : (
-            <div className="p-6 sm:p-10">
+            <motion.div
+              key="result"
+              initial={shouldReduceMotion ? false : { opacity: 0, x: 16 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={shouldReduceMotion ? undefined : { opacity: 0, x: -16 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              className="p-6 sm:p-10"
+            >
               <p className="text-sm font-medium uppercase tracking-wide text-cyan">
                 Recommended starting system
               </p>
@@ -201,8 +218,9 @@ export function OpportunityFinder() {
                   </button>
                 )}
               </div>
-            </div>
+            </motion.div>
           )}
+        </AnimatePresence>
         </Card>
       </div>
     </section>

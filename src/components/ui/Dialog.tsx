@@ -23,12 +23,13 @@ export function DialogContent({
 }) {
   return (
     <DialogPrimitive.Portal>
-      <DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm data-[state=open]:animate-fade-up" />
+      <DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm motion-safe:data-[state=open]:animate-dialog-overlay-in motion-safe:data-[state=closed]:animate-dialog-overlay-out" />
       <DialogPrimitive.Content
         className={cn(
           "fixed z-50 flex flex-col bg-bg-raised text-fg shadow-2xl focus:outline-none",
           "inset-x-0 bottom-0 top-auto h-[92dvh] rounded-t-2xl border-t border-border",
           "sm:inset-auto sm:left-1/2 sm:top-1/2 sm:h-auto sm:max-h-[85vh] sm:w-full sm:max-w-lg sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-2xl sm:border",
+          "motion-safe:data-[state=open]:animate-dialog-content-in motion-safe:data-[state=closed]:animate-dialog-content-out",
           className
         )}
         {...props}

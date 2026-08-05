@@ -1,4 +1,5 @@
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Reveal } from "@/components/ui/Reveal";
 import { differentiators } from "@/content/home";
 
 export function WhyAsk() {
@@ -12,13 +13,13 @@ export function WhyAsk() {
 
         <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
           {differentiators.map((item, i) => (
-            <div key={item.title} className="lg:col-span-1">
+            <Reveal key={item.title} delay={i * 0.06} className="lg:col-span-1">
               <span className="font-heading text-2xl text-fg-subtle">
                 {String(i + 1).padStart(2, "0")}
               </span>
               <h3 className="mt-3 font-heading text-lg font-medium text-fg">{item.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-fg-muted">{item.description}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>

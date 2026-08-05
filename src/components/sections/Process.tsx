@@ -1,5 +1,6 @@
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { AnimatedFlow } from "@/components/ui/AnimatedFlow";
+import { Reveal } from "@/components/ui/Reveal";
 import { processSteps, processDiagram } from "@/content/home";
 
 export function Process() {
@@ -12,27 +13,28 @@ export function Process() {
         />
 
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {processSteps.map((step) => (
-            <div
-              key={step.step}
-              className="rounded-2xl border border-border bg-bg-raised/50 p-6"
-            >
-              <span className="font-heading text-3xl font-medium text-accent-strong">
-                {String(step.step).padStart(2, "0")}
-              </span>
-              <h3 className="mt-3 font-heading text-lg font-medium text-fg">{step.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-fg-muted">{step.description}</p>
-              <p className="mt-4 border-t border-border pt-3 text-xs font-medium uppercase tracking-wide text-cyan">
-                {step.deliverable}
-              </p>
-            </div>
+          {processSteps.map((step, i) => (
+            <Reveal key={step.step} delay={i * 0.08}>
+              <div className="h-full rounded-2xl border border-border bg-bg-raised/50 p-6">
+                <span className="font-heading text-3xl font-medium text-accent-strong">
+                  {String(step.step).padStart(2, "0")}
+                </span>
+                <h3 className="mt-3 font-heading text-lg font-medium text-fg">{step.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-fg-muted">{step.description}</p>
+                <p className="mt-4 border-t border-border pt-3 text-xs font-medium uppercase tracking-wide text-cyan">
+                  {step.deliverable}
+                </p>
+              </div>
+            </Reveal>
           ))}
         </div>
 
-        <div className="mt-14 rounded-2xl border border-border bg-bg-raised/30 p-6 sm:p-8">
-          <p className="mb-6 text-sm font-medium text-fg-muted">System diagram</p>
-          <AnimatedFlow steps={[...processDiagram]} orientation="horizontal" />
-        </div>
+        <Reveal delay={0.15}>
+          <div className="mt-14 rounded-2xl border border-border bg-bg-raised/30 p-6 sm:p-8">
+            <p className="mb-6 text-sm font-medium text-fg-muted">System diagram</p>
+            <AnimatedFlow steps={[...processDiagram]} orientation="horizontal" />
+          </div>
+        </Reveal>
       </div>
     </section>
   );

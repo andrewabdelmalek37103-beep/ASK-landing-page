@@ -2,6 +2,7 @@ import { Check } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Card, CardContent } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
+import { Reveal } from "@/components/ui/Reveal";
 import { TrackedCTA } from "@/components/conversion/TrackedCTA";
 import { engagementOptions } from "@/content/home";
 import { cn } from "@/lib/utils";
@@ -16,9 +17,9 @@ export function EngagementOptions() {
         />
 
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
-          {engagementOptions.map((option) => (
+          {engagementOptions.map((option, i) => (
+            <Reveal key={option.id} delay={i * 0.08}>
             <Card
-              key={option.id}
               className={cn(
                 "flex h-full flex-col",
                 option.badge && "border-accent/50 shadow-lg shadow-accent/5"
@@ -55,6 +56,7 @@ export function EngagementOptions() {
                 </TrackedCTA>
               </CardContent>
             </Card>
+            </Reveal>
           ))}
         </div>
 

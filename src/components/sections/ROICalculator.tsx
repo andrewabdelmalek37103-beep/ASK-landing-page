@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Calculator, ChevronDown } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Card } from "@/components/ui/Card";
@@ -50,6 +51,7 @@ export function ROICalculator() {
   const [started, setStarted] = useState(false);
   const [revealed, setRevealed] = useState(false);
   const [showAssumptions, setShowAssumptions] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
 
   function updateInput(key: keyof typeof roiDefaults, value: number) {
     if (!started) {
@@ -260,7 +262,15 @@ export function ROICalculator() {
             Calculate My Opportunity
           </Button>
 
+          <AnimatePresence>
           {revealed && (
+            <motion.div
+              initial={shouldReduceMotion ? false : { opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={shouldReduceMotion ? undefined : { opacity: 0, height: 0 }}
+              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              className="overflow-hidden"
+            >
             <div className="mt-8 border-t border-border pt-8">
               <div className="grid gap-3 sm:grid-cols-2">
                 <Metric
@@ -305,7 +315,9 @@ export function ROICalculator() {
                 Validate My Opportunity
               </TrackedCTA>
             </div>
+            </motion.div>
           )}
+          </AnimatePresence>
         </Card>
       </div>
     </section>

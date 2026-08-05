@@ -2,6 +2,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Card, CardContent } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { Metric } from "@/components/ui/Metric";
+import { Reveal } from "@/components/ui/Reveal";
 import { TrackedCTA } from "@/components/conversion/TrackedCTA";
 import { systems } from "@/content/systems";
 
@@ -16,8 +17,9 @@ export function Systems() {
         />
 
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
-          {systems.map((system) => (
-            <Card key={system.id} className="flex h-full flex-col">
+          {systems.map((system, i) => (
+            <Reveal key={system.id} delay={i * 0.08}>
+            <Card className="flex h-full flex-col">
               <CardContent className="flex h-full flex-col gap-5 pt-6">
                 <div>
                   <h3 className="font-heading text-xl font-medium text-fg">{system.name}</h3>
@@ -94,6 +96,7 @@ export function Systems() {
                 </TrackedCTA>
               </CardContent>
             </Card>
+            </Reveal>
           ))}
         </div>
       </div>
