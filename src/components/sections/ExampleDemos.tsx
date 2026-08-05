@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { AlertTriangle, CheckCircle2, User } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Card } from "@/components/ui/Card";
@@ -12,6 +13,7 @@ import { cn } from "@/lib/utils";
 export function ExampleDemos() {
   const [activeId, setActiveId] = useState(demoTabs[0].id);
   const activeTab = demoTabs.find((t) => t.id === activeId) ?? demoTabs[0];
+  const shouldReduceMotion = useReducedMotion();
 
   function handleTabChange(id: string) {
     setActiveId(id);
@@ -57,7 +59,15 @@ export function ExampleDemos() {
           role="tabpanel"
           id={`demo-panel-${activeTab.id}`}
           aria-labelledby={`demo-tab-${activeTab.id}`}
-          className="mt-8 p-6 sm:p-10"
+          className="mt-8 overflow-hidden p-6 sm:p-10"
+        >
+        <AnimatePresence mode="wait" initial={false}>
+        <motion.div
+          key={activeTab.id}
+          initial={shouldReduceMotion ? false : { opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={shouldReduceMotion ? undefined : { opacity: 0, y: -8 }}
+          transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
         >
           {activeTab.customerLine && (
             <div className="mb-6 flex flex-col gap-3">
@@ -105,6 +115,8 @@ export function ExampleDemos() {
           <div className="mt-6 border-t border-border pt-4">
             <Badge variant="outline">{activeTab.disclaimer}</Badge>
           </div>
+        </motion.div>
+        </AnimatePresence>
         </Card>
       </div>
     </section>

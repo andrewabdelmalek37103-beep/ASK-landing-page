@@ -1,5 +1,6 @@
 import { Target, ListChecks, Map, Check, X } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Reveal } from "@/components/ui/Reveal";
 import { TrackedCTA } from "@/components/conversion/TrackedCTA";
 import { goodFit, tooEarly } from "@/content/home";
 
@@ -20,16 +21,15 @@ export function BookingCTA() {
         />
 
         <div className="mt-10 grid gap-4 sm:grid-cols-3">
-          {benefits.map((benefit) => {
+          {benefits.map((benefit, i) => {
             const Icon = benefit.icon;
             return (
-              <div
-                key={benefit.text}
-                className="flex items-center gap-3 rounded-xl border border-border bg-bg-raised/40 p-5"
-              >
-                <Icon className="h-5 w-5 shrink-0 text-cyan" aria-hidden="true" />
-                <p className="text-sm text-fg">{benefit.text}</p>
-              </div>
+              <Reveal key={benefit.text} delay={i * 0.08}>
+                <div className="flex items-center gap-3 rounded-xl border border-border bg-bg-raised/40 p-5">
+                  <Icon className="h-5 w-5 shrink-0 text-cyan" aria-hidden="true" />
+                  <p className="text-sm text-fg">{benefit.text}</p>
+                </div>
+              </Reveal>
             );
           })}
         </div>
@@ -48,29 +48,33 @@ export function BookingCTA() {
         </div>
 
         <div className="mt-16 grid gap-6 sm:grid-cols-2">
-          <div className="rounded-2xl border border-cyan/30 bg-cyan-soft p-6">
-            <h3 className="font-heading text-lg font-medium text-fg">Good fit</h3>
-            <ul className="mt-4 space-y-2.5">
-              {goodFit.map((item) => (
-                <li key={item} className="flex items-start gap-2.5 text-sm text-fg-muted">
-                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-cyan" aria-hidden="true" />
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
+          <Reveal>
+            <div className="rounded-2xl border border-cyan/30 bg-cyan-soft p-6">
+              <h3 className="font-heading text-lg font-medium text-fg">Good fit</h3>
+              <ul className="mt-4 space-y-2.5">
+                {goodFit.map((item) => (
+                  <li key={item} className="flex items-start gap-2.5 text-sm text-fg-muted">
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-cyan" aria-hidden="true" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
 
-          <div className="rounded-2xl border border-border bg-bg-raised/40 p-6">
-            <h3 className="font-heading text-lg font-medium text-fg">Probably too early</h3>
-            <ul className="mt-4 space-y-2.5">
-              {tooEarly.map((item) => (
-                <li key={item} className="flex items-start gap-2.5 text-sm text-fg-muted">
-                  <X className="mt-0.5 h-4 w-4 shrink-0 text-fg-subtle" aria-hidden="true" />
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
+          <Reveal delay={0.08}>
+            <div className="rounded-2xl border border-border bg-bg-raised/40 p-6">
+              <h3 className="font-heading text-lg font-medium text-fg">Probably too early</h3>
+              <ul className="mt-4 space-y-2.5">
+                {tooEarly.map((item) => (
+                  <li key={item} className="flex items-start gap-2.5 text-sm text-fg-muted">
+                    <X className="mt-0.5 h-4 w-4 shrink-0 text-fg-subtle" aria-hidden="true" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
         </div>
       </div>
     </section>
