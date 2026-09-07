@@ -1,24 +1,28 @@
 @import "tailwindcss";
 
 :root {
-  --color-bg: #1a0a0a;
-  --color-bg-raised: #241010;
-  --color-bg-elevated: #301515;
+  /* Palette derived from the delivered logo mockup: a teal-to-navy vertical
+     gradient. --color-bg is the solid navy used for most of the page;
+     --gradient-hero reproduces the full teal -> navy gradient for the top
+     of the page (see Hero.tsx), matching the reference image. */
+  --color-bg: #12182a;
+  --color-bg-raised: #182036;
+  --color-bg-elevated: #202a44;
   --color-fg: #f6f4ef;
   --color-fg-muted: #b7bccb;
   --color-fg-subtle: #7d8399;
-  --color-border: #3d1a1a;
-  --color-border-strong: #5c2626;
-  /* Primary accent: vivid crimson-red (CTAs, links, primary emphasis). */
-  --color-accent: #e5484d;
-  --color-accent-strong: #ff6b6f;
-  --color-accent-soft: #e5484d1a;
-  /* Secondary accent: warm coral/rose from the same red family, used for
-     data-flow visuals, badges, and status highlights. Token is still named
-     "cyan" for backward compatibility with existing utility classes
+  --color-border: #223252;
+  --color-border-strong: #34486e;
+  /* Primary accent: brightened teal-blue, sampled from the top of the
+     logo's gradient (#0f465e) and lifted for contrast on CTAs/links. */
+  --color-accent: #1c86ab;
+  --color-accent-strong: #35a8cf;
+  --color-accent-soft: #1c86ab1a;
+  /* Secondary accent: same teal family, kept for existing utility classes
      (text-cyan, bg-cyan-soft, etc.) -- only its color value changed. */
-  --color-cyan: #ff8b7a;
-  --color-cyan-soft: #ff8b7a1a;
+  --color-cyan: #2fa9c0;
+  --color-cyan-soft: #2fa9c01a;
+  --gradient-hero: linear-gradient(180deg, #0f465e 0%, #17364c 35%, #202c46 65%, #12182a 100%);
 }
 
 @theme inline {
@@ -89,6 +93,10 @@ body {
     linear-gradient(to right, color-mix(in srgb, var(--color-border) 60%, transparent) 1px, transparent 1px),
     linear-gradient(to bottom, color-mix(in srgb, var(--color-border) 60%, transparent) 1px, transparent 1px);
   background-size: 48px 48px;
+}
+
+.hero-gradient {
+  background: var(--gradient-hero);
 }
 
 .text-balance {

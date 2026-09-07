@@ -4,7 +4,7 @@ import { HeroVisual } from "@/components/sections/HeroVisual";
 
 export function Hero() {
   return (
-    <section id="top" className="relative overflow-hidden pb-20 pt-32 sm:pb-28 sm:pt-40">
+    <section id="top" className="hero-gradient relative overflow-hidden pb-20 pt-32 sm:pb-28 sm:pt-40">
       <div className="bg-grid pointer-events-none absolute inset-0 opacity-[0.15]" aria-hidden="true" />
       <div
         className="pointer-events-none absolute -top-40 left-1/2 h-96 w-[48rem] -translate-x-1/2 rounded-full bg-accent/20 blur-3xl"
